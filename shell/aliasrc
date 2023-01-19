@@ -1,0 +1,49 @@
+#!/bin/sh
+
+# Use neovim for vim if present.
+[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
+
+# Use $XINITRC variable if file exists.
+[ -f "$XINITRC" ] && alias startx="startx $XINITRC"
+
+
+se() { cd ~/.local/bin; $EDITOR $(fzf) ;}
+
+# Verbosity and settings that you pretty much just always are going to want.
+alias \
+	cp="cp -iv" \
+	mv="mv -iv" \
+	rm="rm -vI" \
+	ll="ls -alF" \
+	cat="bat" \
+	bc="bc -ql" \
+	mkd="mkdir -pv" \
+	gb="explorer.exe" \
+	gbt="/mnt/c/Users/ciceron/AppData/Local/Chromium/Application/chrome.exe $(wslpath -w $(realpath ./index.html))" \
+	ffmpeg="ffmpeg -hide_banner" \
+	zrc="$EDITOR ${XDG_CONFIG_HOME:-$HOME/.zshrc}" \
+	aliasrc="$EDITOR ${XDG_CONFIG_HOME:-$HOME/.config/shell/aliasrc}" \
+	cfv="$EDITOR ${XDG_CONFIG_HOME:-$HOME/.config/nvim/init.vim}"
+
+# Colorize commands when possible.
+alias \
+	ls="ls -hN --color=auto --group-directories-first" \
+	grep="grep --color=auto" \
+	diff="diff --color=auto" \
+	ccat="highlight --out-format=ansi" \
+	ip="ip -color=auto"
+
+# These common commands are just too long! Abbreviate them.
+alias \
+	ka="killall" \
+	YT="youtube-viewer" \
+	sdn="shutdown -h now" \
+	e="$EDITOR" \
+	v="$EDITOR" \
+	z="zathura"
+
+alias \
+	lf="lf" \
+	magit="nvim -c MagitOnly" \
+	ref="shortcuts >/dev/null; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" \
+	weath="less -S ${XDG_CACHE_HOME:-$HOME/.cache}/weatherreport" \
